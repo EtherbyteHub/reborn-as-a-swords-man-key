@@ -1,0 +1,121 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Player = game.Players.LocalPlayer
+local Window = OrionLib:MakeWindow({Name = "Etherbyte Hub key system", HidePremium = false, SaveConfig = true, IntroText = "Etherbyte Hub"})
+
+OrionLib:MakeNotification({
+    Name = "Logged in!",
+    Content = "You are logged in as " .. Player.Name .. ".",
+    Image = "rbxassetid://4483345998",
+    Time = 5
+})
+
+getgenv().key = "KEY_THRPHSRPOTX"
+getgenv().keyinput = "string"
+local SavedKeyPath = "Hub_SavedKey.txt"
+
+function makescript()
+    print("loaded!")
+    destroy()
+end
+
+function keynoti()
+    OrionLib:MakeNotification({
+        Name = "Correct Key",
+        Content = "Access granted",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
+end
+
+function nokeynoti()
+    OrionLib:MakeNotification({
+        Name = "Incorrect Key",
+        Content = "No access granted, incorrect key",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
+end
+
+function destroy()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/EtherbyteHub/reborn-as-a-sword-man-script/main/reborn%20as%20a%20swords%20man%20script",true))()
+    local success, errorMsg = pcall(function()
+        game:GetService("CoreGui").Orion:Destroy()
+    end)
+    if not success then
+        warn("Failed to destroy UI: " .. errorMsg)
+    end
+end
+
+function saveKey(key)
+    if writefile then
+        local success, errorMsg = pcall(function()
+            writefile(SavedKeyPath, key)
+        end)
+        if not success then
+            warn("Failed to save key: " .. errorMsg)
+        end
+    end
+end
+
+function loadKey()
+    if readfile then
+        local success, key = pcall(function()
+            return readfile(SavedKeyPath)
+        end)
+        if success then
+            return key
+        else
+            warn("Failed to load key: " .. key)
+        end
+    end
+    return nil
+end
+
+function checkKey(key)
+    if key == getgenv().key then
+        makescript()
+        keynoti()
+        saveKey(key)
+    else
+        nokeynoti()
+    end
+end
+
+local savedKey = loadKey()
+if savedKey then
+    getgenv().keyinput = savedKey
+    checkKey(savedKey)
+end
+
+local Tab = Window:MakeTab({
+    Name = "Key",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+Tab:AddTextbox({
+    Name = "Enter Key",
+    Default = "Key here",
+    TextDisappear = true,
+    Callback = function(Value)
+        getgenv().keyinput = Value
+    end
+})
+
+Tab:AddButton({
+    Name = "Check Key",
+    Callback = function()
+        checkKey(getgenv().keyinput)
+    end
+})
+
+local Discord = Tab:AddSection({Name = "Join Our Discord To Get Key"})
+
+Discord:AddButton({
+    Name = "Copy Key Link (lootlab)",
+    Callback = function()
+        setclipboard("https://lootdest.com/s?05cc875d75de799b")
+        print("Discord link copied to clipboard")
+    end
+})
