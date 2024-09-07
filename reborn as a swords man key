@@ -42,10 +42,11 @@ function destroy()
 local success, errorMsg = pcall(function()
         game:GetService("CoreGui").Orion:Destroy()
     end)
-    if not success then
-        warn("Failed to destroy UI: " .. errorMsg)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/EtherbyteHub/reborn-as-a-sword-man-script/main/reborn%20as%20a%20swords%20man%20script",true))()
     
+    if not success then
+        warn("Failed to destroy UI: " .. errorMsg)
+
     end
 end
 
