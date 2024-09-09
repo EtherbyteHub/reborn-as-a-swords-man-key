@@ -10,7 +10,7 @@ OrionLib:MakeNotification({
     Time = 5
 })
 
-getgenv().key = "KEY_THRPHSRPOTX"
+getgenv().key = "KEY_GOKUETHER"
 getgenv().keyinput = "string"
 local SavedKeyPath = "Hub_SavedKey.txt"
 
