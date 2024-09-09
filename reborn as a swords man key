@@ -118,7 +118,7 @@ local Discord = Tab:AddSection({Name = "Join Our Discord To Get Key"})
 Discord:AddButton({
     Name = "Copy Key Link (lootlab)",
     Callback = function()
-        setclipboard("https://lootdest.com/s?05cc875d75de799b")
+        setclipboard("https://loot-link.com/s?c99b6cfb")
         print("Discord link copied to clipboard")
     end
 })
